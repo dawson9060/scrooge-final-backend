@@ -1,0 +1,18 @@
+We serve the app with php artisan serve from the root directory (./backend)
+That runs it on localhost:8000 by default
+
+run a migration with php artisan migrate
+
+mysql depends on laragon running -> go to http://localhost/phpmyadmin then to pawswap db to access db
+
+make a migration: php artisan make:migration "name of the migration i.e. add_description_to_events_table"
+
+make a new Model with migration: php artisan make:model Pet -m
+
+make a controller: php artisan make:controller AuthController
+
+make a resource controller: php artisan make:controller PostController --resource
+
+make an enum: php artisan make:enum EventStatus
+
+list all routes: php artisan route:list
