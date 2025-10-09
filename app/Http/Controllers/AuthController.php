@@ -15,16 +15,11 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $data = $request->validate([
-            "firstName" => "required|string|max:100",
-            "lastName" => "required|string|max:100",
-            "city" => "required|string|max:100",
-            "state" => "required|string|max:2|alpha",
-            "phone" => "string|nullable|size:10",
-            "zip" => "required|integer|digits:5",
+            "name" => "string|max:100",
             "email" => "required|email|unique:users,email",
             "password" => "required|confirmed|string|min:8",
         ]);
-
+        Log::info("REGISTER DATA:", $data);
         User::create($data);
 
         return response()->json([

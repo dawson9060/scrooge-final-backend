@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('unique_expenses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId(column: 'user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
             $table->string('name', 255);
             $table->double('amount');

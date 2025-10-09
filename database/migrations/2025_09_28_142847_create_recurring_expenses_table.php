@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('recurring_expenses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId(column: 'user_id')->constrained()->onDelete('cascade');
             $table->string('name', 255);
             $table->double('amount');
             $table->tinyInteger('day_of_month')->nullable();

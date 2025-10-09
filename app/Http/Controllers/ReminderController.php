@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reminder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReminderController extends Controller
 {
@@ -11,15 +13,11 @@ class ReminderController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $userId = Auth::user()->id;
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $reminders = Reminder::where("user_id", $userId)->get();
+
+        return response()->json(["status" => 200, "reminders" => $reminders]);
     }
 
     /**
@@ -27,7 +25,16 @@ class ReminderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            "name" => "required|string|max:255",
+            "date" => "required|integer|min:1",
+        ]);
+
+        $data['user_id'] = Auth::user()->id;
+
+        $reminder = Reminder::create($data);
+
+        return response()->json(["status" => 200, "message" => "Reminder created successfully", "reminders" => $reminder]);
     }
 
     /**
@@ -35,30 +42,39 @@ class ReminderController extends Controller
      */
     public function show(string $id)
     {
-        //
-    }
+        $userId = Auth::user()->id;
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        $reminder = Reminder::where("user_id", $userId)->where("id", $id)->first();
+
+        if (!$reminder) {
+            return response()->json(["status" => 404, "message" => "Reminder not found"]);
+        }
+
+        return response()->json(["status" => 200, "reminder" => $reminder]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Reminder $reminder)
     {
-        //
+        $data = $request->validate([
+            "name" => "required|string|max:255",
+            "date" => "required|integer|min:1",
+        ]);
+
+        $reminder->update($data);
+
+        return response()->json(["status" => 200, "message" => "Reminder updated successfully", "reminder" => $reminder]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Reminder $reminder)
     {
-        //
+        $reminder->delete();
+
+        return response()->json(["status" => 200, "message" => "Reminder deleted successfully"]);
     }
 }

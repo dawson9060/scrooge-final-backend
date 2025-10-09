@@ -5,6 +5,11 @@ when cloning this repo for a new project, run 'composer install' as the first co
 test
 run a migration with php artisan migrate
 
+Table / Model naming convention:
+    By default, Laravel assumes:
+        - The model name is singular and PascalCase (e.g., Post)
+        - The table name is plural and snake_case (e.g., posts)
+
 mysql depends on laragon running -> go to http://localhost/phpmyadmin then to pawswap db to access db
 
 make a migration: php artisan make:migration "name of the migration i.e. add_description_to_events_table"

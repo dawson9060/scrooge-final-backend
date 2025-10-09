@@ -12,9 +12,10 @@ return new class extends Migration {
     {
         Schema::create('reminders', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('date');
-            $table->string('title', 255);
             $table->timestamps();
+            $table->foreignId(column: 'user_id')->constrained()->onDelete('cascade');
+            $table->double('date');
+            $table->string('name', 255);
         });
     }
 

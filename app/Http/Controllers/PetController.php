@@ -14,7 +14,6 @@ class PetController extends Controller
     {
         $owner_id = Auth::user()->id;
 
-        Log::info("OWNER ID", [$owner_id]);
         $pets = Pet::where("owner_id", $owner_id)->get();
 
         return response()->json(["status" => 200, "pets" => $pets]);
