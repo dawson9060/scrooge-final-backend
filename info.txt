@@ -1,6 +1,8 @@
 We serve the app with php artisan serve from the root directory (./backend)
 That runs it on localhost:8000 by default
 
+login info: dawson9060@gmail.com / "password"
+
 when cloning this repo for a new project, run 'composer install' as the first command via command line to get vendor files installed and artisan commands working
 test
 run a migration with php artisan migrate

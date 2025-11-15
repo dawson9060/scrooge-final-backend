@@ -15,7 +15,7 @@ class ReminderController extends Controller
     {
         $userId = Auth::user()->id;
 
-        $reminders = Reminder::where("user_id", $userId)->get();
+        $reminders = Reminder::where("user_id", $userId)->orderBy('date', 'desc')->get();
 
         return response()->json(["status" => 200, "reminders" => $reminders]);
     }
