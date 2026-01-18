@@ -18,7 +18,7 @@ class UniqueExpenseController extends Controller
     {
         $userId = Auth::user()->id;
 
-        $uniqueExpenses = UniqueExpense::where("user_id", $userId)->get();
+        $uniqueExpenses = UniqueExpense::where("user_id", $userId)->orderBy('date', 'asc')->get();
 
         return response()->json(["status" => 200, "uniqueExpenses" => $uniqueExpenses]);
     }

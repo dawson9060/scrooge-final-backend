@@ -17,7 +17,7 @@ class RecurringExpenseController extends Controller
     {
         $userId = Auth::user()->id;
 
-        $recurringExpenses = RecurringExpense::where("user_id", $userId)->get();
+        $recurringExpenses = RecurringExpense::where("user_id", $userId)->orderBy('amount', 'desc')->get();
 
         return response()->json(["status" => 200, "recurringExpenses" => $recurringExpenses]);
     }

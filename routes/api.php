@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -18,6 +19,9 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
     Route::resource('uniqueExpenses', controller: UniqueExpenseController::class);
     Route::resource('recurringExpenses', controller: RecurringExpenseController::class);
     Route::resource('reminders', controller: ReminderController::class);
+    Route::put('/user/budget', [UserController::class, 'updateBudget']);
+
+
 
     // Route::get('/events/allEvents', [EventController::class, 'allEvents']);
 });
